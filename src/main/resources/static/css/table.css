@@ -1,0 +1,32 @@
+table, th, td {
+    border: 1px solid transparent;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 50px 0;
+}
+
+table tr {
+    display: table-cell;
+}
+
+table td {
+    text-align: center;
+    padding: 0 10px;
+}
+
+table tr td {
+    display: block;
+}
+
+img {
+    width: 150px;
+    height: 234px;
+    text-align: center;
+}
+
+.title {
+    font-weight: bold;
+}

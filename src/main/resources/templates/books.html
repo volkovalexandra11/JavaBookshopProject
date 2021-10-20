@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+
+  <table>
+    <tbody>
+      <tr th:if="${bookList.isEmpty()}">
+        <td colspan="2"> No Books Available </td>
+      </tr>
+      <tr th:each="book : ${bookList}">
+        <td><img th:src="@{'/img/' + ${book.getCover()}}"></td>
+        <td><span class="title" th:text="${book.getTitle()}"> </span></td>
+        <td><span th:text="${book.getAuthor()}"> Author </span></td>
+        <td><span th:text="${book.getPrice()}"> Price </span></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
