@@ -5,6 +5,6 @@
     <title>Welcome</title>
 </head>
 <body>
-    <p th:text = "'Welcome, new user' + ${firstName} + ' ' +  ${secondName}"></p>
+    <p th:text = "'Welcome, new user ' + ${user.getFirst_name()} + ' ' +  ${user.getLast_name()}"></p>
 </body>
 </html>
