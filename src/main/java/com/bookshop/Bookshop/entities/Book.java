@@ -15,27 +15,22 @@ public class Book {
     private String cover;
 
 
-    // Getter
     public Integer getBook_id() {
         return book_id;
     }
 
-    // Getter
     public String getTitle() {
         return title;
     }
 
-    // Getter
     public String getAuthor() {
         return author;
     }
 
-    // Getter
     public Double getPrice() {
         return price;
     }
 
-    // Getter
     public String getCover() {
         return cover;
     }
