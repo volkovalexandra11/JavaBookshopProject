@@ -12,6 +12,8 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private Long id;
 
+    private Long user_id;
+
     public Long getId() {
         return id;
     }

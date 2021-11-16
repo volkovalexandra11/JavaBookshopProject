@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-</head>
-<body>
-<!--<div th:if="${newUser}">-->
-<!--&lt;!&ndash;    <p th:text="'Welcome, new user ' + ${user.getFirst_name()} + ' ' +  ${user.getLast_name()}"></p>&ndash;&gt;-->
-<!--</div>-->
-<!--<div th:if="${!newUser}">-->
-<!--&lt;!&ndash;    <p th:text="'Nice to see you again ' + ${user.getFirst_name()} + ' ' +  ${user.getLast_name()}"></p>&ndash;&gt;-->
-<!--</div>-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Welcome</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;<div th:if="${newUser}">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <p th:text="'Welcome, new user ' + ${user.getFirst_name()} + ' ' +  ${user.getLast_name()}"></p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div th:if="${!newUser}">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <p th:text="'Nice to see you again ' + ${user.getFirst_name()} + ' ' +  ${user.getLast_name()}"></p>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-<div>
-    <p>Hello from Canada!</p>
-</div>
+<!--<div>-->
+<!--    <p>Hello from Canada!</p>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="ru">
+<body>
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span th:text="${#authentication.getPrincipal().getFirst_name()}"></span></div>
 </body>
 </html>
