@@ -1,7 +1,6 @@
-package com.bookshop.Bookshop.configurations;
+package com.bookshop.Bookshop.axiliary;
 
 import org.springframework.security.core.Authentication;
-import com.bookshop.Bookshop.configurations.IAuthenticationFacade;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 

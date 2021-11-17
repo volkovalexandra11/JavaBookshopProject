@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Your order</title>
+    <link rel="stylesheet" th:href="@{/css/order.css}">
 </head>
 <body>
     <table>
@@ -12,8 +13,8 @@
         </tr>
         <tr th:each="book : ${bookList}">
             <td><img th:src="@{'/img/' + ${book.getCover()}}"></td>
-            <td><span class="title" th:text="${book.getTitle()}"> </span></td>
-            <td><span th:text="${book.getAuthor()}"> Author </span></td>
+            <td class="under"><span class="title" th:text="${book.getTitle()}"> </span></td>
+            <td class="under"><span class="author" th:text="${book.getAuthor()}"> Author </span></td>
             <td><span th:text="${book.getPrice()}"> Price </span></td>
         </tr>
         </tbody>

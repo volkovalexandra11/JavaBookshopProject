@@ -7,6 +7,9 @@
 </head>
 <body>
 
+<button th:if="${!(authorized)}" type="button" onclick="location.href='/login'">Login</button>
+<button th:if="${!(authorized)}" type="button" onclick="location.href='/signup'">Sign Up</button>
+<button th:if="${(authorized)}" type="button" onclick="location.href='/userProfile'"> Your profile</button>
   <table>
     <tbody>
       <tr th:if="${bookList.isEmpty()}">
@@ -17,10 +20,10 @@
         <td><span class="title" th:text="${book.getTitle()}"> </span></td>
         <td><span th:text="${book.getAuthor()}"> Author </span></td>
         <td><span th:text="${book.getPrice()}"> Price </span></td>
+        <td><a th:href="@{/books/{id}(id=${book.getBook_id()})}">книга</a></td>
       </tr>
     </tbody>
   </table>
 
-  <button type="button" onclick="location.href='/orders'">Show Order</button>
 </body>
 </html>

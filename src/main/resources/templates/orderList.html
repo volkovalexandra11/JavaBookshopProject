@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders </title>
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+</head>
+<body>
+<table>
+    <tbody>
+    <tr th:if="${orderList.isEmpty()}">
+        <td colspan="2"> No Books Available </td>
+    </tr>
+    <tr th:each="order : ${orderList}">
+        <td>Order</td>
+        <td><span th:if="${order.isPayed()}"> Payed </span></td>
+        <td><span th:if="${!(order.isPayed())}">Not payed </span></td>
+        <td><span th:if="${order.getSum() == null}" th:text="0"></span></td>
+        <td><span th:text="${order.getSum()}"> Price </span></td>
+        <td><a th:href="@{/orders/{id}(id=${order.getId()})}">Show Order</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
