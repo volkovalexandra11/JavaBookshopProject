@@ -40,7 +40,6 @@ public class BooksController {
     }
 
 
-
     @RequestMapping(value = "books/{id}")
     String GetBookInfo(Model model, @PathVariable("id") Long id) {
         Book book = booksRepository.findByBook_id(id);

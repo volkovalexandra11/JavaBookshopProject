@@ -1,13 +1,23 @@
 package com.bookshop.Bookshop.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "books_orders")
 public class BookToOrder {
+    public Long getBOrder_id() {
+        return bOrder_id;
+    }
+
+    public void setBOrder_id(Long id) {
+        this.bOrder_id = id;
+    }
+
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bOrder_id;
+
     private Long order_id;
 
     public Long getBook_id() {

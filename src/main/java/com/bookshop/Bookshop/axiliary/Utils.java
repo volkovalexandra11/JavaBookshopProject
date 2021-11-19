@@ -19,6 +19,12 @@ public class Utils {
     }
 
     public boolean isLogged() {
-        return getUser() != null;
+        Authentication authentication = authenticationFacade.getAuthentication();
+        try {
+            User user = (User)authentication.getPrincipal();
+            return true;
+        } catch (ClassCastException e) {
+            return false;
+        }
     }
 }

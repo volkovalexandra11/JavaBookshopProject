@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookInfo</title>
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+    <table>
+        <tbody>
+        <tr>
+            <td><img th:src="@{'/img/' + ${book.getCover()}}"></td>
+        </tr>
+        <tr>
+            <td><h2 class="title" th:text="${book.getTitle()}"> </h2></td>
+            <td><h6 th:text="${book.getAuthor()}"> Author </h6></td>
+            <td><span th:text="${book.getPrice()}"> Price </span></td>
+            <td><a th:href="@{/tocart/book/{id}(id=${book.getBook_id()})}">To cart</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/books/}">К списку книг</a>
+</body>
+</html>

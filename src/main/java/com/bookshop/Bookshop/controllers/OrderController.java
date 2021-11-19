@@ -2,12 +2,10 @@ package com.bookshop.Bookshop.controllers;
 
 import com.bookshop.Bookshop.axiliary.IAuthenticationFacade;
 import com.bookshop.Bookshop.axiliary.Utils;
-import com.bookshop.Bookshop.entities.Book;
-import com.bookshop.Bookshop.entities.BookToOrder;
-import com.bookshop.Bookshop.entities.Order;
-import com.bookshop.Bookshop.entities.User;
+import com.bookshop.Bookshop.entities.*;
 import com.bookshop.Bookshop.repos.BooksOrderRepository;
 import com.bookshop.Bookshop.repos.BooksRepository;
+import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.repos.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +25,10 @@ public class OrderController {
     private OrderRepository orderRepository;
     @Autowired
     private BooksRepository booksRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
@@ -54,7 +56,71 @@ public class OrderController {
                 .collect(Collectors.toList());
 
         model.addAttribute("bookList", bookList);
+
+        double sum = bookList
+                .stream()
+                .map(Book::getPrice)
+                .mapToDouble(price -> price)
+                .sum();
+
+        model.addAttribute("sum", sum);
+        Order order = orderRepository.findById(orderId).get();
+        model.addAttribute("order", order);
         return "order";
+    }
+
+    @RequestMapping(value = "orderCart")
+    String order(Model model) {
+        Order order = new Order();
+        Long userId = new Utils(authenticationFacade).getUser().getUser_id();
+        order.setUser_id(userId);
+        order.setPayed(false);
+
+        List<Book> books = cartRepository
+                .getAllByUserId(userId)
+                .stream()
+                .map(Cart::getBooks_id)
+                .map(booksRepository::findByBook_id)
+                .collect(Collectors.toList());
+
+        double sum = books
+                .stream()
+                .map(Book::getPrice)
+                .mapToDouble(price -> price)
+                .sum();
+
+
+        order.setSum(sum);
+        order.setStatus("processing");
+        orderRepository.save(order);
+
+        Long id = orderRepository.findTopByOrderByIdDesc();
+
+        for (Book b :
+                books) {
+            BookToOrder bo = new BookToOrder();
+            bo.setOrder_id(id);
+            bo.setBook_id(b.getBook_id());
+            booksOrderRepository.save(bo);
+        }
+
+        cartRepository.deleteAllByUserId(userId);
+
+        model.addAttribute("sum", sum);
+        return "redirect:/orders/" + id;
+    }
+
+    @RequestMapping(value = {"/toBooks", "/toBookList", "/back"})
+    String toBooks(){
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/pay/{id}")
+    String pay(@PathVariable Long id) {
+        Order order = orderRepository.getById(id);
+        order.setStatus("payed");
+        orderRepository.update(id);
+        return "payed";
     }
 }
 

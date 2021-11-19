@@ -20,7 +20,8 @@
         <td><span class="title" th:text="${book.getTitle()}"> </span></td>
         <td><span th:text="${book.getAuthor()}"> Author </span></td>
         <td><span th:text="${book.getPrice()}"> Price </span></td>
-        <td><a th:href="@{/books/{id}(id=${book.getBook_id()})}">книга</a></td>
+        <td><a th:href="@{/books/{id}(id=${book.getBook_id()})}">About</a></td>
+        <td><a th:if="${authorized}" th:href="@{/cart/books/{id}(id=${book.getBook_id()})}">To cart</a></td>
       </tr>
     </tbody>
   </table>

@@ -17,7 +17,14 @@
             <td class="under"><span class="author" th:text="${book.getAuthor()}"> Author </span></td>
             <td><span th:text="${book.getPrice()}"> Price </span></td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="sum"><span th:text="${sum}"></span></td>
+        </tr>
         </tbody>
     </table>
+    <a th:if="${!(order.isPayed())}" th:href="@{/pay/{id}(id=${order.getId()})}"><button type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button></a>
+    <button type="button" onclick="location.href='/back'">To Book List</button>
 </body>
 </html>

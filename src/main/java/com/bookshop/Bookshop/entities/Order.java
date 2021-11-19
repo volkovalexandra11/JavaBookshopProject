@@ -1,22 +1,28 @@
 package com.bookshop.Bookshop.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
     @Column(name = "order_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
     private Long user_id;
-
     private boolean payed;
-    private Long sum;
+    private Double sum;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
 
     public Long getUser_id() {
         return user_id;
@@ -34,11 +40,11 @@ public class Order {
         this.payed = payed;
     }
 
-    public Long getSum() {
+    public Double getSum() {
         return sum;
     }
 
-    public void setSum(Long sum) {
+    public void setSum(Double sum) {
         this.sum = sum;
     }
 

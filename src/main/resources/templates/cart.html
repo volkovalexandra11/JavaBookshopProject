@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your cart</title>
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+<table>
+    <tbody>
+    <tr th:if="${bookList.isEmpty()}">
+        <td colspan="2"> Your Cart is empty :( </td>
+    </tr>
+    <tr th:each="book : ${bookList}">
+        <td><img th:src="@{'/img/' + ${book.getCover()}}"></td>
+        <td><span class="title" th:text="${book.getTitle()}"> </span></td>
+        <td><span th:text="${book.getAuthor()}"> Author </span></td>
+        <td><span th:text="${book.getPrice()}"> Price </span></td>
+    </tr>
+    </tbody>
+</table>
+<a th:if="${!(bookList.isEmpty())}" type="button" th:href="@{/orderCart}">Order</a>
+<a th:if="${(bookList.isEmpty())}" type="button" th:href="@{/toBooks}">Order</a>
+</body>
+</html>
