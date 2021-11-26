@@ -10,6 +10,7 @@
 <button th:if="${!(authorized)}" type="button" onclick="location.href='/login'">Login</button>
 <button th:if="${!(authorized)}" type="button" onclick="location.href='/signup'">Sign Up</button>
 <button th:if="${(authorized)}" type="button" onclick="location.href='/userProfile'"> Your profile</button>
+<button th:if="${(authorized)}" type="button" onclick="location.href='/logout'"> Log out</button>
   <table>
     <tbody>
       <tr th:if="${bookList.isEmpty()}">

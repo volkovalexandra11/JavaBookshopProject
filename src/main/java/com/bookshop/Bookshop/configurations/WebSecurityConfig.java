@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -25,19 +26,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                //Доступ разрешен всем пользователей
-                .antMatchers("/", "/books").permitAll()
-                //Все остальные страницы требуют аутентификации
                 .and()
-                //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login")
-                //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/welcome")
                 .failureUrl("/no_user")
                 .permitAll()
                 .and()
                 .logout()
+                .logoutRequestMatcher((new AntPathRequestMatcher("/logout")))
+                .logoutSuccessUrl("/books")
                 .permitAll()
                 .logoutSuccessUrl("/");
     }

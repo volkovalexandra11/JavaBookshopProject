@@ -25,18 +25,17 @@ public class BooksController {
 
     @GetMapping("/books")
     public String listAll(Model model) {
-        return getBookModel(model, utils.isLogged());
+        return getBookModel(model);
     }
 
     @GetMapping("/")
     public String listAllBooks(Model model) {
-        utils = new Utils(authenticationFacade);
-        return getBookModel(model, utils.isLogged());
+        return getBookModel(model);
     }
 
     @GetMapping("/welcome")
     public String listAllBooksAuthorized(Model model) {
-       return getBookModel(model, utils.isLogged());
+        return getBookModel(model);
     }
 
 
@@ -47,8 +46,10 @@ public class BooksController {
         return "book";
     }
 
-    private String getBookModel(Model model, boolean authorized) {
+    private String getBookModel(Model model) {
+        utils = new Utils(authenticationFacade);
         List<Book> bookList = booksRepository.findAll();
+        boolean authorized = utils.isLogged();
         model.addAttribute("bookList", bookList);
         model.addAttribute("authorized", authorized);
         return "books";
