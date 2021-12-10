@@ -1,10 +1,10 @@
 package com.bookshop.Bookshop.controllers;
 
 import com.bookshop.Bookshop.entities.*;
-import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.repos.OrderRepository;
 import com.bookshop.Bookshop.services.BookOrderService;
 import com.bookshop.Bookshop.services.BookService;
+import com.bookshop.Bookshop.services.CartService;
 import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +23,11 @@ public class OrderController {
     private BookService bookService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private OrderRepository orderRepository;
-
-    @Autowired
-    private CartRepository cartRepository;
 
 
     @RequestMapping(value = "orders")
@@ -72,12 +70,7 @@ public class OrderController {
         order.setUser_id(userId);
         order.setPayed(false);
 
-        List<Book> books = cartRepository
-                .getAllByUserId(userId)
-                .stream()
-                .map(Cart::getBooks_id)
-                .map(bookService::getById)
-                .collect(Collectors.toList());
+        List<Book> books = cartService.getBooks(userId);
 
         double sum = books
                 .stream()
@@ -100,7 +93,7 @@ public class OrderController {
             bookOrderService.save(bo);
         }
 
-        cartRepository.deleteAllByUserId(userId);
+        cartService.deleteAllByUserId(userId);
 
         model.addAttribute("sum", sum);
         return "redirect:/orders/" + id;
