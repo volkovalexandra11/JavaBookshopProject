@@ -1,11 +1,7 @@
 package com.bookshop.Bookshop.controllers;
 
 import com.bookshop.Bookshop.entities.*;
-import com.bookshop.Bookshop.repos.OrderRepository;
-import com.bookshop.Bookshop.services.BookOrderService;
-import com.bookshop.Bookshop.services.BookService;
-import com.bookshop.Bookshop.services.CartService;
-import com.bookshop.Bookshop.services.UserService;
+import com.bookshop.Bookshop.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +21,8 @@ public class OrderController {
     private UserService userService;
     @Autowired
     private CartService cartService;
-
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
 
     @RequestMapping(value = "orders")
@@ -35,7 +30,7 @@ public class OrderController {
         User user = userService.getCurrentUser();
         Long userId = user.getUser_id();
 
-        List<Order> orders = orderRepository.findAllByUser_id(userId);
+        List<Order> orders = orderService.getAllByUserId(userId);
         model.addAttribute("orderList", orders);
 
         return "orderList";
@@ -58,7 +53,7 @@ public class OrderController {
                 .sum();
 
         model.addAttribute("sum", sum);
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderService.getOrderById(orderId);
         model.addAttribute("order", order);
         return "order";
     }
@@ -81,9 +76,9 @@ public class OrderController {
 
         order.setSum(sum);
         order.setStatus("processing");
-        orderRepository.save(order);
+        orderService.save(order);
 
-        Long id = orderRepository.findTopByOrderByIdDesc();
+        Long id = orderService.findTopByOrderByIdDesc();
 
         for (Book b :
                 books) {
@@ -106,9 +101,9 @@ public class OrderController {
 
     @RequestMapping(value = "/pay/{id}")
     String pay(@PathVariable Long id) {
-        Order order = orderRepository.getById(id);
+        Order order = orderService.getOrderById(id);
         order.setStatus("payed");
-        orderRepository.update(id);
+        orderService.update(id);
         return "payed";
     }
 }
