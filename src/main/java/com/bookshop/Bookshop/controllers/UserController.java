@@ -22,11 +22,11 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     private CartRepository cartRepository;
-    @Autowired
-    private BookService bookService;
 
     @GetMapping(value = "userProfile")
     String getUserProfile(Model model) {

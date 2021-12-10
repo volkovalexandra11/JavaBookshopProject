@@ -1,12 +1,9 @@
 package com.bookshop.Bookshop.controllers;
 
-import com.bookshop.Bookshop.axiliary.IAuthenticationFacade;
-import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.*;
-import com.bookshop.Bookshop.repos.BooksOrderRepository;
-import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.repos.OrderRepository;
+import com.bookshop.Bookshop.services.BookOrderService;
 import com.bookshop.Bookshop.services.BookService;
 import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +18,18 @@ import java.util.stream.Collectors;
 @Controller
 public class OrderController {
     @Autowired
-    private BooksOrderRepository booksOrderRepository;
+    private BookOrderService bookOrderService;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private UserService userService;
+
 
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private BookService bookService;
 
     @Autowired
     private CartRepository cartRepository;
-
-    @Autowired
-    private UserService userService;
 
 
     @RequestMapping(value = "orders")
@@ -48,10 +45,7 @@ public class OrderController {
 
     @RequestMapping(value = "orders/{id}")
     String getBookList(Model model, @PathVariable("id") Long orderId) {
-        List<Long> bookIdsList = booksOrderRepository
-                .findAllByOrder_id(orderId).stream()
-                .map(BookToOrder::getBook_id)
-                .collect(Collectors.toList());
+        List<Long> bookIdsList = bookOrderService.getBookIds(orderId);
 
         List<Book> bookList = bookIdsList.stream()
                 .map(bookService::getById)
@@ -103,7 +97,7 @@ public class OrderController {
             BookToOrder bo = new BookToOrder();
             bo.setOrder_id(id);
             bo.setBook_id(b.getBook_id());
-            booksOrderRepository.save(bo);
+            bookOrderService.save(bo);
         }
 
         cartRepository.deleteAllByUserId(userId);
@@ -113,7 +107,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = {"/toBooks", "/toBookList", "/back"})
-    String toBooks(){
+    String toBooks() {
         return "redirect:/";
     }
 

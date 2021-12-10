@@ -1,6 +1,6 @@
 package com.bookshop.Bookshop.controllers;
 
-import com.bookshop.Bookshop.entities.Book;;
+import com.bookshop.Bookshop.entities.Book;
 
 import com.bookshop.Bookshop.services.BookService;
 import com.bookshop.Bookshop.services.UserService;
