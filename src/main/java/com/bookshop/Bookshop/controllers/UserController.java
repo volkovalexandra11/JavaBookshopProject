@@ -5,8 +5,8 @@ import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.Book;
 import com.bookshop.Bookshop.entities.Cart;
 import com.bookshop.Bookshop.entities.User;
-import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
+import com.bookshop.Bookshop.services.BookService;
 import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private CartRepository cartRepository;
     @Autowired
-    private BooksRepository booksRepository;
+    private BookService bookService;
 
     @GetMapping(value = "userProfile")
     String getUserProfile(Model model) {
@@ -46,7 +46,7 @@ public class UserController {
                 .collect(Collectors.toList());
 
         List<Book> bookList = booksIds.stream()
-                .map(booksRepository::findByBook_id)
+                .map(bookService::getById)
                 .collect(Collectors.toList());
 
         model.addAttribute("bookList", bookList);

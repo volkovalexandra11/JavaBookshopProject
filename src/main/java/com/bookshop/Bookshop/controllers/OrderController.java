@@ -7,6 +7,7 @@ import com.bookshop.Bookshop.repos.BooksOrderRepository;
 import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.repos.OrderRepository;
+import com.bookshop.Bookshop.services.BookService;
 import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
-    private BooksRepository booksRepository;
+    private BookService bookService;
 
     @Autowired
     private CartRepository cartRepository;
@@ -53,7 +54,7 @@ public class OrderController {
                 .collect(Collectors.toList());
 
         List<Book> bookList = bookIdsList.stream()
-                .map(booksRepository::findByBook_id)
+                .map(bookService::getById)
                 .collect(Collectors.toList());
 
         model.addAttribute("bookList", bookList);
@@ -81,7 +82,7 @@ public class OrderController {
                 .getAllByUserId(userId)
                 .stream()
                 .map(Cart::getBooks_id)
-                .map(booksRepository::findByBook_id)
+                .map(bookService::getById)
                 .collect(Collectors.toList());
 
         double sum = books
