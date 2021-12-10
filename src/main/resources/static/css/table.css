@@ -9,17 +9,18 @@ table {
 }
 
 table tr {
-    display: table-cell;
+    /*display: table-cell;*/
+    display: inline-block;
 }
 
 table td {
     text-align: center;
     padding: 0 10px;
-}
-
-table tr td {
+    /*display: block;*/
     display: block;
 }
+
+tbody, thead { display: inline-block; vertical-align: top; }
 
 img {
     width: 150px;
@@ -30,3 +31,50 @@ img {
 .title {
     font-weight: bold;
 }
+
+#search-form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+#search-label {
+    display: inline-block;
+    justify-content: center;
+    width: 90%;
+    margin-left: 10px;
+    /*border-radius: 30%;*/
+}
+
+#search-input {
+    width: 50%;
+    border-radius: 30px;
+    height: 38px;
+    font-size: 20px;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+button {
+    background: royalblue;
+    display: inline;
+    height: 40px;
+    width: 120px;
+    border-radius: 30px;
+    font-weight: bolder;
+}
+
+.inline {
+    display: inline;
+    margin-left: 200px;
+}
+

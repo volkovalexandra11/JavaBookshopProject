@@ -25,7 +25,10 @@
         </tr>
         </tbody>
     </table>
-    <a th:if="${!(order.isPayed())}" th:href="@{/pay/{id}(id=${order.getId()})}"><button type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button></a>
+    <a th:if="${!(order.isPayed())}" th:href="@{/pay/{id}(id=${order.getId()})}">
+        <button type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button>
+    </a>
+
     <button type="button" onclick="location.href='/back'">To Book List</button>
 </body>
 </html>
