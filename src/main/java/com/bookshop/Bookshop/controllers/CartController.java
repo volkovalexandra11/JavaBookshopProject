@@ -5,6 +5,7 @@ import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.Cart;
 import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
+import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,14 +18,12 @@ public class CartController {
     private CartRepository cartRepository;
 
     @Autowired
-    private IAuthenticationFacade authenticationFacade;
+    private UserService userService;
 
-    @Autowired
-    private BooksRepository booksRepository;
 
     @RequestMapping(value = "/cart/books/{id}")
     String addToCart(@PathVariable Long id) {
-        Long userId = new Utils(authenticationFacade).getUser().getUser_id();
+        Long userId = userService.getCurrentUser().getUser_id();
         Cart c = new Cart();
         c.setBooks_id(id);
         c.setUser_id(userId);
@@ -34,7 +33,7 @@ public class CartController {
 
     @RequestMapping(value="/tocart/books/{id}")
     String addToCartFromBook(@PathVariable Long id) {
-        Long userId = new Utils(authenticationFacade).getUser().getUser_id();
+        Long userId = userService.getCurrentUser().getUser_id();
         Cart c = new Cart();
         c.setBooks_id(id);
         c.setUser_id(userId);

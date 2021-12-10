@@ -19,6 +19,26 @@ public class Book {
         return book_id;
     }
 
+    public void setBook_id(Long book_id) {
+        this.book_id = book_id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public String getTitle() {
         return title;
     }

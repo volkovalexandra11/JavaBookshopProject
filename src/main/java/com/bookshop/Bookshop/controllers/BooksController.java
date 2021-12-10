@@ -5,9 +5,11 @@ import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.Book;;
 import com.bookshop.Bookshop.repos.BooksRepository;
 
+import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,24 +22,27 @@ public class BooksController {
     @Autowired
     private IAuthenticationFacade authenticationFacade;
 
-    private Utils utils;
+    @Autowired
+    private UserService userService;
 
 
-    @GetMapping("/books")
+    @GetMapping({"/books", "/", "/welcome", "/search"})
     public String listAll(Model model) {
         return getBookModel(model);
     }
 
-    @GetMapping("/")
-    public String listAllBooks(Model model) {
-        return getBookModel(model);
-    }
 
-    @GetMapping("/welcome")
-    public String listAllBooksAuthorized(Model model) {
-        return getBookModel(model);
+    @PostMapping("/search")
+    String search(@ModelAttribute Book book, Model model, BindingResult bindingResult) {
+        List<Book> bookList = booksRepository.findAllByTitle(book.getTitle());
+        if (bookList.isEmpty()) {
+            bookList = booksRepository.findAllByAuthor(book.getTitle());
+        }
+        boolean authorized = userService.isLogged();
+        model.addAttribute("bookList", bookList);
+        model.addAttribute("authorized", authorized);
+        return "books";
     }
-
 
     @RequestMapping(value = "books/{id}")
     String GetBookInfo(Model model, @PathVariable("id") Long id) {
@@ -47,11 +52,11 @@ public class BooksController {
     }
 
     private String getBookModel(Model model) {
-        utils = new Utils(authenticationFacade);
         List<Book> bookList = booksRepository.findAll();
-        boolean authorized = utils.isLogged();
+        boolean authorized = userService.isLogged();
         model.addAttribute("bookList", bookList);
         model.addAttribute("authorized", authorized);
+        model.addAttribute("book", new Book());
         return "books";
     }
 }

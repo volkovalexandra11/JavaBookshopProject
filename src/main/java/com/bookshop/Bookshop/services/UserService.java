@@ -1,5 +1,7 @@
 package com.bookshop.Bookshop.services;
 
+import com.bookshop.Bookshop.axiliary.IAuthenticationFacade;
+import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.User;
 import com.bookshop.Bookshop.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class UserService implements UserDetailsService {
     UserRepository userRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,8 +67,16 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    public List<User> usergtList(Long idMin) {
+    public List<User> userGtList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+    public User getCurrentUser() {
+        return new Utils(authenticationFacade).getUser();
+    }
+
+    public boolean isLogged() {
+        return new Utils(authenticationFacade).isLogged();
     }
 }

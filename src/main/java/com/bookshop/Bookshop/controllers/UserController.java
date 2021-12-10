@@ -7,6 +7,7 @@ import com.bookshop.Bookshop.entities.Cart;
 import com.bookshop.Bookshop.entities.User;
 import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
+import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,10 @@ import java.util.stream.Collectors;
 @Controller
 public class UserController {
 
+
     @Autowired
-    private IAuthenticationFacade authenticationFacade;
+    private UserService userService;
+
     @Autowired
     private CartRepository cartRepository;
     @Autowired
@@ -27,18 +30,15 @@ public class UserController {
 
     @GetMapping(value = "userProfile")
     String getUserProfile(Model model) {
-        User currentUser = new Utils(authenticationFacade).getUser();
+        User currentUser = userService.getCurrentUser();
         model.addAttribute("user", currentUser);
         return "userProfilePage";
     }
 
     @GetMapping(value = "cart")
     String getUserCart(Model model) {
-        User currentUser = new Utils(authenticationFacade).getUser();
+        User currentUser = userService.getCurrentUser();
         Long userId = currentUser.getUser_id();
-
-        List<Cart> a = cartRepository
-                .getAllByUserId(userId);
 
         List<Long> booksIds = cartRepository
                 .getAllByUserId(userId).stream()

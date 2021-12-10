@@ -7,6 +7,7 @@ import com.bookshop.Bookshop.repos.BooksOrderRepository;
 import com.bookshop.Bookshop.repos.BooksRepository;
 import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.repos.OrderRepository;
+import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +31,12 @@ public class OrderController {
     private CartRepository cartRepository;
 
     @Autowired
-    private IAuthenticationFacade authenticationFacade;
+    private UserService userService;
 
 
     @RequestMapping(value = "orders")
     String GetOrderDetails(Model model) {
-        User user = new Utils(authenticationFacade).getUser();
+        User user = userService.getCurrentUser();
         Long userId = user.getUser_id();
 
         List<Order> orders = orderRepository.findAllByUser_id(userId);
@@ -72,7 +73,7 @@ public class OrderController {
     @RequestMapping(value = "orderCart")
     String order(Model model) {
         Order order = new Order();
-        Long userId = new Utils(authenticationFacade).getUser().getUser_id();
+        Long userId = userService.getCurrentUser().getUser_id();
         order.setUser_id(userId);
         order.setPayed(false);
 
