@@ -15,7 +15,7 @@
         <td colspan="2"> No Books Available </td>
     </tr>
     <tr th:each="order : ${orderList}">
-        <td>Order</td>
+        <td th:text="'Order ' + ${order.getId()}"></td>
         <td th:if="${order.isPayed()}"> Payed </td>
         <td th:if="${!(order.isPayed())}">Not payed</td>
         <td><span th:if="${order.getSum() == null}" th:text="0"></span></td>
