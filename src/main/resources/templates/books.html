@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/table.css}">
     <link rel="stylesheet" th:href="@{/css/button.css}">
+    <link rel="stylesheet" th:href="@{/css/link.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
@@ -39,7 +40,10 @@
         <td><span th:text="${book.getAuthor()}"> Author </span></td>
         <td><span th:text="${book.getPrice()}"> Price </span></td>
         <td><a th:href="@{/books/{id}(id=${book.getBook_id()})}">About</a></td>
-        <td><a th:if="${authorized}" th:href="@{/cart/books/{id}(id=${book.getBook_id()})}">To cart</a></td>
+        <td><a th:if="${authorized}" th:href="@{/cart/books/{id}(id=${book.getBook_id()})}">
+            <button>To cart</button>
+        </a>
+        </td>
     </tr>
     </tbody>
 </table>
