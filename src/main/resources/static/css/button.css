@@ -8,7 +8,7 @@ button {
     outline: inherit;
 }
 
-button.top {
+.top {
     background: royalblue;
     display: inline;
     height: 40px;

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Sign up</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/css/button.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 </head>
     <body>
-        <form action="#" th:action="@{addUser}" th:object="${user}" method="post">
+        <form class="data" action="#" th:action="@{addUser}" th:object="${user}" method="post">
             <label>
                 <input type="text" th:field="*{first_name}" placeholder="Фамилия" required/>
             </label>
@@ -27,7 +29,7 @@
             </label>
             <br />
             <br />
-            <input type="submit"/>
+            <input class="top" type="submit"/>
         </form>
     </body>
 </html>

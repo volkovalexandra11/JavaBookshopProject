@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/order.css}">
     <link rel="stylesheet" th:href="@{/css/link.css}">
     <link rel="stylesheet" th:href="@{/css/button.css}">
+    <link rel="stylesheet" th:href="@{/css/button.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
@@ -24,6 +25,12 @@
             <td></td>
             <td></td>
             <td class="sum"><span th:text="${sum}"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="red" th:if="${order.isPayed()}"> Payed </td>
+            <td class="green" th:if="${!(order.isPayed())}">Not payed</td>
         </tr>
         </tbody>
     </table>
