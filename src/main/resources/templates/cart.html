@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Your cart</title>
-    <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/order.css}">
+    <link rel="stylesheet" th:href="@{/css/button.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
@@ -22,6 +23,6 @@
     </tbody>
 </table>
 <a th:if="${!(bookList.isEmpty())}" type="button" th:href="@{/orderCart}">Order</a>
-<a th:if="${(bookList.isEmpty())}" type="button" th:href="@{/toBooks}">Order</a>
+<a th:if="${(bookList.isEmpty())}" type="button" th:href="@{/toBooks}">To book list</a>
 </body>
 </html>

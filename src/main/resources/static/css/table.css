@@ -54,24 +54,24 @@ img {
     font-size: 20px;
 }
 
-button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
+/*button {*/
+/*    background: none;*/
+/*    color: inherit;*/
+/*    border: none;*/
+/*    padding: 0;*/
+/*    font: inherit;*/
+/*    cursor: pointer;*/
+/*    outline: inherit;*/
+/*}*/
 
-button {
-    background: royalblue;
-    display: inline;
-    height: 40px;
-    width: 120px;
-    border-radius: 30px;
-    font-weight: bolder;
-}
+/*button.top {*/
+/*    background: royalblue;*/
+/*    display: inline;*/
+/*    height: 40px;*/
+/*    width: 120px;*/
+/*    border-radius: 30px;*/
+/*    font-weight: bolder;*/
+/*}*/
 
 .inline {
     display: inline;

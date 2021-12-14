@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
-    <button type="button" onclick="location.href='/logout'"> Log out</button>
     <table>
         <tbody>
         <tr th:if="${bookList.isEmpty()}">
@@ -30,6 +29,7 @@
         <button type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button>
     </a>
 
-    <button type="button" onclick="location.href='/back'">To Book List</button>
+    <button class="top" type="button" onclick="location.href='/logout'"> Log out</button>
+    <button class="top" type="button" onclick="location.href='/back'">To Book List</button>
 </body>
 </html>

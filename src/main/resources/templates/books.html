@@ -4,6 +4,7 @@
     <title>Books</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/table.css}">
+    <link rel="stylesheet" th:href="@{/css/button.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
@@ -11,17 +12,16 @@
 <form action="#" th:action="@{search}" th:object="${book}" method="post" id="search-form">
     <label id="search-label">
         <input id="search-input" type="text" th:field="*{title}">
-        <button type="submit">Search</button>
+        <button class="top" type="submit">Search</button>
 
         <div class="inline">
-            <button th:if="${!(authorized)}" type="button" onclick="location.href='/login'">Login
+            <button class="top" th:if="${!(authorized)}" type="button" onclick="location.href='/login'">Login</button>
+            <button class="top" th:if="${!(authorized)}" type="button" onclick="location.href='/signup'">Sign Up
             </button>
-            <button  th:if="${!(authorized)}" type="button" onclick="location.href='/signup'">Sign Up
-            </button>
-            <button  th:if="${(authorized)}" type="button" onclick="location.href='/userProfile'"> Your
+            <button class="top" th:if="${(authorized)}" type="button" onclick="location.href='/userProfile'"> Your
                 profile
             </button>
-            <button  th:if="${(authorized)}" type="button" onclick="location.href='/logout'"> Log out
+            <button class="top" th:if="${(authorized)}" type="button" onclick="location.href='/logout'"> Log out
             </button>
         </div>
     </label>
