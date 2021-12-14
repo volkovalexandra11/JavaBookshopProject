@@ -1,7 +1,7 @@
 package com.bookshop.Bookshop.services;
 
-import com.bookshop.Bookshop.axiliary.IAuthenticationFacade;
-import com.bookshop.Bookshop.axiliary.Utils;
+import com.bookshop.Bookshop.auxiliary.IAuthenticationFacade;
+import com.bookshop.Bookshop.auxiliary.Utils;
 import com.bookshop.Bookshop.entities.User;
 import com.bookshop.Bookshop.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

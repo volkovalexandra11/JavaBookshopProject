@@ -1,10 +1,6 @@
 package com.bookshop.Bookshop.controllers;
 
-import com.bookshop.Bookshop.axiliary.IAuthenticationFacade;
-import com.bookshop.Bookshop.axiliary.Utils;
 import com.bookshop.Bookshop.entities.Cart;
-import com.bookshop.Bookshop.repos.BooksRepository;
-import com.bookshop.Bookshop.repos.CartRepository;
 import com.bookshop.Bookshop.services.CartService;
 import com.bookshop.Bookshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.bookshop.Bookshop.axiliary;
+package com.bookshop.Bookshop.auxiliary;
 
 import com.bookshop.Bookshop.entities.User;
 import org.springframework.security.core.Authentication;
