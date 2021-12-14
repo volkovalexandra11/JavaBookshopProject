@@ -3,11 +3,13 @@ package com.bookshop.Bookshop.services;
 import com.bookshop.Bookshop.entities.Book;
 import com.bookshop.Bookshop.repos.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Configurable
 public class BookService {
     @Autowired
     BooksRepository booksRepository;
@@ -27,5 +29,4 @@ public class BookService {
     public List<Book> findAllByAuthor(String authorName) {
         return booksRepository.findAllByAuthor(authorName);
     }
-
 }

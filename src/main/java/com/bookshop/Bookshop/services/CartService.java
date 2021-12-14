@@ -14,6 +14,9 @@ public class CartService {
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    BookService bookService;
+
     public List<Long> getBookIds(Long userId) {
         return cartRepository
                 .getAllByUserId(userId)
@@ -23,7 +26,6 @@ public class CartService {
     }
 
     public List<Book> getBooks(Long userId) {
-        BookService bookService = new BookService();
         return getBookIds(userId)
                 .stream()
                 .map(bookService::getById)
