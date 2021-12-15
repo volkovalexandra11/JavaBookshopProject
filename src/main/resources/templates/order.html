@@ -6,7 +6,6 @@
     <link rel="stylesheet" th:href="@{/css/order.css}">
     <link rel="stylesheet" th:href="@{/css/link.css}">
     <link rel="stylesheet" th:href="@{/css/button.css}">
-    <link rel="stylesheet" th:href="@{/css/button.css}">
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
 </head>
 <body>
@@ -35,7 +34,7 @@
         </tbody>
     </table>
     <a th:if="${!(order.isPayed())}" th:href="@{/pay/{id}(id=${order.getId()})}">
-        <button type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button>
+        <button class="top" type="button" th:href="@{/pay/{id}(id=${order.getId()})}">Pay</button>
     </a>
 
     <button class="top" type="button" onclick="location.href='/logout'"> Log out</button>

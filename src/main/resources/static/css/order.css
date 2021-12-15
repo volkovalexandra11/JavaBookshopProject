@@ -19,6 +19,10 @@ table {
     empty-cells: show;
 }
 
+.sum {
+    background-color: #C4C4C4;;
+}
+
 .under {
     display: block;
 }
