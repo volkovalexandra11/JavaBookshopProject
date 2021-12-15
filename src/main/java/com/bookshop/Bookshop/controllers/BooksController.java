@@ -28,7 +28,7 @@ public class BooksController {
 
     @PostMapping("/search")
     String search(@ModelAttribute Book book, Model model) {
-        List<Book> bookList = bookService.findAllByTitle(book.getTitle());
+        List<Book> bookList = bookService.findAllByContainsTitle(book.getTitle());
         if (bookList.isEmpty()) {
             bookList = bookService.findAllByAuthor(book.getTitle());
         }
