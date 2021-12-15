@@ -28,7 +28,7 @@ public class BookService {
         return booksRepository
                 .findAll()
                 .stream()
-                .filter(b -> b.getTitle().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT)))
+                .filter(b -> b.getTitle().trim().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT)))
                 .collect(Collectors.toList());
     }
 
